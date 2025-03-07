@@ -1,0 +1,6 @@
+header:
+  version: 17
+
+local_conf_header:
+  use-x32-psabi: |
+    DEFAULTTUNE = "x86-64-x32"

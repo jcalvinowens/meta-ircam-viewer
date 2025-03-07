@@ -1,0 +1,42 @@
+From 0e2309b84bdee71e70ae939e55462b8cbe282d2a Mon Sep 17 00:00:00 2001
+Message-ID: <0e2309b84bdee71e70ae939e55462b8cbe282d2a.1740957344.git.calvin@wbinvd.org>
+From: Mike Gilbert <floppym@gentoo.org>
+Date: Sat, 30 Nov 2024 16:07:52 -0500
+Subject: [PATCH] efi: stub out __grub_efi_api when GRUB_UTIL is defined
+
+When building utils for x32, ms_abi is not a valid attribute.
+
+Bug: https://bugs.gentoo.org/945484
+Signed-off-by: Mike Gilbert <floppym@gentoo.org>
+Link: https://927826.bugs.gentoo.org/attachment.cgi?id=912891
+Upstream-Status: Submitted [https://lists.gnu.org/archive/html/grub-devel/2024-11/msg00231.html]
+Signed-off-by: Calvin Owens <calvin@wbinvd.org>
+---
+ include/grub/efi/api.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
+index b686e8afe..8b70be5e7 100644
+--- a/include/grub/efi/api.h
++++ b/include/grub/efi/api.h
+@@ -590,6 +590,7 @@ typedef grub_efi_uintn_t grub_efi_status_t;
+  * annotation. (This includes protocols implemented by GRUB that are installed
+  * into the EFI protocol database.)
+  */
++#if !defined(GRUB_UTIL)
+ #if defined(__i386__)
+ #define __grub_efi_api			__attribute__((regparm(0)))
+ #elif defined(__x86_64__)
+@@ -597,6 +598,9 @@ typedef grub_efi_uintn_t grub_efi_status_t;
+ #else
+ #define __grub_efi_api
+ #endif
++#else /* defined(GRUB_UTIL) */
++#define __grub_efi_api
++#endif
+ 
+ #define GRUB_EFI_ERROR_CODE(value)	\
+   ((((grub_efi_status_t) 1) << (sizeof (grub_efi_status_t) * 8 - 1)) | (value))
+-- 
+2.47.2
+

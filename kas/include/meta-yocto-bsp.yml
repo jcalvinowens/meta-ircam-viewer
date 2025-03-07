@@ -1,0 +1,10 @@
+header:
+  version: 17
+
+repos:
+  meta-yocto:
+    url: https://git.yoctoproject.org/meta-yocto
+    branch: master
+    layers:
+      meta-yocto-bsp:
+      meta-poky: excluded

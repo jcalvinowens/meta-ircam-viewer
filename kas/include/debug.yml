@@ -1,0 +1,6 @@
+header:
+  version: 17
+
+local_conf_header:
+  debug: |
+    IMAGE_FEATURES = "tools-debug allow-empty-password empty-root-password allow-root-login"

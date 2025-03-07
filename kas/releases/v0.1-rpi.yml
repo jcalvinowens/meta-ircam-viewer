@@ -1,0 +1,61 @@
+header:
+  version: 17
+
+distro: ircam
+target: ircam-viewer-image
+
+repos:
+  bitbake:
+    url: https://git.openembedded.org/bitbake
+    commit: 842e94234c9b9faf4e902721f516071f643e49c9
+    layers:
+      .: excluded
+
+  openembedded-core:
+    url: https://git.openembedded.org/openembedded-core
+    commit: 39545c955474a43d11a45d74a88a5999b02cb8b3
+    layers:
+      meta:
+
+  meta-openembedded:
+    url: https://git.openembedded.org/meta-openembedded
+    commit: 74110869a8c1c54270c3a919ef7e84bed896e166
+    layers:
+      meta-oe:
+      meta-python:
+
+  meta-raspberrypi:
+    url: https://git.yoctoproject.org/meta-raspberrypi
+    commit: d605ed7ae7defbe0e09cf8ed4c01e6cfdd188192
+    layers:
+      .:
+
+  meta-ircam-viewer:
+    layers:
+      .:
+
+local_conf_header:
+  rpi: |
+    LICENSE_FLAGS_ACCEPTED += "synaptics-killswitch"
+    ENABLE_UART = "1"
+    LICENSE_FLAGS_ACCEPTED += "commercial_ffmpeg"
+    IMAGE_FSTYPES = "wic"
+    DL_DIR = "/var/tmp/yocto_dl"
+    BB_GENERATE_SHALLOW_TARBALLS = "1"
+    BB_GENERATE_MIRROR_TARBALLS = "1"
+    BB_GIT_SHALLOW = "1"
+    BB_DISKMON_DIRS = " \
+      STOPTASKS,${TMPDIR},1G,100K \
+      STOPTASKS,${DL_DIR},1G,100K \
+      STOPTASKS,${SSTATE_DIR},1G,100K \
+      STOPTASKS,/tmp,100M,100K \
+      HALT,${TMPDIR},100M,1K \
+      HALT,${DL_DIR},100M,1K \
+      HALT,${SSTATE_DIR},100M,1K \
+      HALT,/tmp,10M,1K"
+    SYSVINIT_ENABLED_GETTYS = " "
+    SERIAL_CONSOLES = " "
+    CONSOLES = " "
+    BUILD_REPRODUCIBLE_BINARIES = "1"
+    REPRODUCIBLE_TIMESTAMP_ROOTFS = "1741327528"
+    SOURCE_DATE_EPOCH = "1741327528"

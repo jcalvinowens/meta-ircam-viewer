@@ -1,0 +1,13 @@
+header:
+  version: 17
+  includes:
+    - kas/base.yml
+    - kas/include/meta-rpi.yml
+
+local_conf_header:
+  accept-synaptics-killswitch: |
+    # https://meta-raspberrypi.readthedocs.io/en/latest/ipcompliance.html
+    LICENSE_FLAGS_ACCEPTED += "synaptics-killswitch"
+
+  enable-uart: |
+    ENABLE_UART = "1"

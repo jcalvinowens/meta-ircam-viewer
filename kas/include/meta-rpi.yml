@@ -1,0 +1,9 @@
+header:
+  version: 17
+
+repos:
+  meta-raspberrypi:
+    url: https://git.yoctoproject.org/meta-raspberrypi
+    branch: master
+    layers:
+      .:

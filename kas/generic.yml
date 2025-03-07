@@ -1,0 +1,5 @@
+header:
+  version: 17
+  includes:
+    - kas/base.yml
+    - kas/include/meta-yocto-bsp.yml
