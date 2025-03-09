@@ -42,6 +42,13 @@ loop13       7:0    0 215.2M  0 loop
 $ sudo mount /dev/loop13p2 /mnt
 ```
 
+## Using the Appliance
+
+The GUI will start within a few seconds when you connect your supported USB IR
+camera. It is controlled via the keyboard: refer to the ircam-viewer
+[README](https://github.com/jcalvinowens/ircam-viewer/blob/master/README.md#viewing)
+for details on how to use it.
+
 ## Building Disk Images
 
 Building this firmware with Yocto should take under an hour on a typical PC
@@ -107,14 +114,7 @@ Use `dd` to write it to bootable media for your target:
 sudo dd if=ircam-viewer-image-blah.rootfs.wic of=/dev/mmcblk0 status=progress
 ```
 
-### Using the Appliance
-
-The GUI will start within a few seconds when you connect your supported USB IR
-camera. It is controlled via the keyboard: refer to the ircam-viewer
-[README](https://github.com/jcalvinowens/ircam-viewer/blob/master/README.md#viewing)
-for details on how to use it.
-
-### Reproducing Releases
+## Reproducing Releases
 
 The confugiration used to build each release is saved in `kas/releases`: these
 are identical to the base configuration at the time, but with pinned Git SHAs.
