@@ -1,8 +1,0 @@
-header:
-  version: 17
-
-local_conf_header:
-  noconsole: |
-    SYSVINIT_ENABLED_GETTYS = " "
-    SERIAL_CONSOLES = " "
-    CONSOLES = " "

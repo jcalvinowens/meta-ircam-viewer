@@ -1,5 +1,5 @@
-PACKAGECONFIG:append = " gles2 kmsdrm libusb"
-PACKAGECONFIG:remove = " \
+PACKAGECONFIG:append:class-target = " gles2 kmsdrm libusb"
+PACKAGECONFIG:remove:class-target = " \
 	alsa \
 	directfb \
 	jack \

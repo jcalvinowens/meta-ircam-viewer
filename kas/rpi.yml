@@ -5,8 +5,8 @@ header:
     - kas/include/meta-rpi.yml
 
 local_conf_header:
+  # https://meta-raspberrypi.readthedocs.io/en/latest/ipcompliance.html
   accept-synaptics-killswitch: |
-    # https://meta-raspberrypi.readthedocs.io/en/latest/ipcompliance.html
     LICENSE_FLAGS_ACCEPTED += "synaptics-killswitch"
 
   enable-uart: |

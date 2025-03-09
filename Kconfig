@@ -113,37 +113,3 @@ config MACHINE
 	default "raspberrypi5" if raspberrypi5
 	default "raspberrypi-armv7" if raspberrypi-armv7
 	default "raspberrypi-armv8" if raspberrypi-armv8
-
-config WANT_NO_CONSOLE
-	def_bool n
-
-config WANT_DEBUG_TOOLS
-	def_bool n
-
-choice
-	prompt "Select target TYPE for image"
-	default debug
-	help
-	  Select the TYPE for the ircam-viewer-image.
-
-	config debug
-		bool "Debug image with tools and no root password"
-		select WANT_DEBUG_TOOLS
-		help
-		  Build an image with debug tools which allows root login.
-
-	config production
-		select WANT_NO_CONSOLE
-		bool "Production image with no login"
-		help
-		  Build an image which does not allow the user to log in.
-
-endchoice
-
-config KAS_INCLUDE_NO_CONSOLE
-	string
-	default "kas/include/noconsole.yml" if WANT_NO_CONSOLE
-
-config KAS_INCLUDE_DEBUG
-	string
-	default "kas/include/debug.yml" if WANT_DEBUG_TOOLS

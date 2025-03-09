@@ -7,4 +7,3 @@ repos:
     branch: master
     layers:
       meta-yocto-bsp:
-      meta-poky: excluded

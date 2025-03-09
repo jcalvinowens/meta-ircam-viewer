@@ -10,9 +10,7 @@ into cell phones).
 
 It currently supports x86 UEFI PCs, and all Raspberry Pi models. It has only
 actually been tested on Atom Silvermont NUCs, and the Raspberry Pi Zero W: see
-KNOWN ISSUES below.
-
-The project is GPLv3 licensed: see LICENSING below.
+KNOWN ISSUES below. The project is GPLv3 licensed: see LICENSING below.
 
 ## Downloadable Disk Images
 
@@ -84,16 +82,6 @@ select "BUILD" to kick off a build!
 You can also build without the menu directly from the command line as follows:
 
 * `KAS_MACHINE=genericx86-64 kas build kas/generic.yml`
-* `KAS_MACHINE=genericx86 kas build kas/generic.yml`
-* `KAS_MACHINE=genericarm64 kas build kas/generic.yml`
-* `KAS_MACHINE=raspberrypi kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi0 kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi0-wifi kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi0-2w-64 kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi2 kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi3-64 kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi4-64 kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi5 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv7 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv8 kas build kas/rpi.yml`
 
@@ -102,13 +90,18 @@ downloaded source tarballs.
 
 ### 4. Flash the image
 
-After the build process successfully completes, the new image will appear at:
+After the build process successfully completes, the new images will appear at:
 
 ```
 ./build/tmp/deploy/images/${MACHINE}/ircam-viewer-image-${MACHINE}.rootfs.wic
+./build/tmp/deploy/images/${MACHINE}/ircam-viewer-debug-image-${MACHINE}.rootfs.wic
 ```
 
-Use `dd` to write it to bootable media for your target:
+The images are identical, except that the "debug" image has no root password,
+contains debugging utilities like `gdb` and `strace`, and contains the full set
+of kernel modules.
+
+Use `dd` to write your desired image to bootable media for your target:
 
 ```
 sudo dd if=ircam-viewer-image-blah.rootfs.wic of=/dev/mmcblk0 status=progress
@@ -120,9 +113,10 @@ The confugiration used to build each release is saved in `kas/releases`: these
 are identical to the base configuration at the time, but with pinned Git SHAs.
 
 ```
-git checkout --detach v0.1
-KAS_MACHINE=genericx86-64 kas build kas/releases/v0.1-generic.yml
-KAS_MACHINE=raspberrypi0-wifi kas build kas/releases/v0.1-rpi.yml
+git checkout --detach v0.2
+KAS_MACHINE=genericx86-64 kas build kas/releases/v0.2-generic.yml
+KAS_MACHINE=raspberrypi-armv7 kas build kas/releases/v0.2-rpi.yml
+KAS_MACHINE=raspberrypi-armv8 kas build kas/releases/v0.2-rpi.yml
 ```
 
 Yocto supports reproducible disk images: if everything is working correctly,
@@ -135,11 +129,11 @@ downloaded from the releases page.
 * Recording almost immediately fills the disk: need to expand on first boot
 * Video cards on PCs other than i915 will not have their kernel module loaded
 * The x86-x32 build doesn't work due to v4l ioctl problems I need to look into
-* Logic for debug target should live in Yocto not Kas
 
 ## Licensing
 
 ```
+Copyright (C) 2025 Calvin Owens <calvin@wbinvd.org>
 SPDX-License-Identifier: GPL-3.0-or-later
 ```
 

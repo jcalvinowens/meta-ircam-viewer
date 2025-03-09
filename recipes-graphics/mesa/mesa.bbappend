@@ -1,5 +1,15 @@
-PACKAGECONFIG:append = " broadcom egl gallium gbm gles lima v3d vc4"
-PACKAGECONFIG:remove = " \
+PACKAGECONFIG:append:class-target = " \
+	broadcom \
+	egl \
+	gallium \
+	gbm \
+	gles \
+	lima \
+	v3d \
+	vc4 \
+	"
+
+PACKAGECONFIG:remove:class-target = " \
 	dri3 \
 	etnaviv \
 	freedreno-fdperf \

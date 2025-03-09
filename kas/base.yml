@@ -2,7 +2,9 @@ header:
   version: 17
 
 distro: ircam
-target: ircam-viewer-image
+target:
+  - ircam-viewer-image
+  - ircam-viewer-debug-image
 
 repos:
   bitbake:
@@ -22,7 +24,6 @@ repos:
     branch: master
     layers:
       meta-oe:
-      meta-python:
 
   meta-ircam-viewer:
     layers:
@@ -30,12 +31,7 @@ repos:
 
 local_conf_header:
   ffmpeg-license: |
-    # Only ffv1 and matroska are used in libav, neither requires licensing. All
-    # optional features which require licensing are disabled in PACKAGECONFIG.
     LICENSE_FLAGS_ACCEPTED += "commercial_ffmpeg"
-
-  imagefstypes: |
-    IMAGE_FSTYPES = "wic"
 
   dldir: |
     DL_DIR = "/var/tmp/yocto_dl"
