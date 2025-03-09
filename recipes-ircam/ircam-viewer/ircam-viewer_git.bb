@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/jcalvinowens/ircam-viewer/blob/master/README.md"
 SRC_URI = "git://github.com/jcalvinowens/ircam-viewer;protocol=https;branch=master"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 LICENSE = "GPL-3.0-or-later"
-SRCREV = "${AUTOREV}"
+SRCREV = "1583aebde2d7d7ce70d0876749c029cc2a98e6f8"
 S = "${WORKDIR}/git"
 
 DEPENDS = "libav libsdl2 libsdl2-ttf"
