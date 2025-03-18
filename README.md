@@ -83,7 +83,6 @@ You can also build without the menu directly from the command line as follows:
 
 * `KAS_MACHINE=genericx86-64 kas build kas/generic.yml`
 * `KAS_MACHINE=raspberrypi0-wifi kas build kas/rpi.yml`
-* `KAS_MACHINE=raspberrypi-armv7 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv8 kas build kas/rpi.yml`
 
 The default configuration uses `/var/tmp/yocto_dl` as the DL\_DIR to cache
@@ -114,29 +113,19 @@ The confugiration used to build each release is saved in `kas/releases`: these
 are identical to the base configuration at the time, but with pinned git SHAs.
 
 ```
-git checkout --detach v0.2
-KAS_MACHINE=genericx86-64 kas build kas/releases/v0.2-generic.yml
-KAS_MACHINE=raspberrypi0-wifi kas build kas/releases/v0.2-rpi.yml
-KAS_MACHINE=raspberrypi-armv7 kas build kas/releases/v0.2-rpi.yml
-KAS_MACHINE=raspberrypi-armv8 kas build kas/releases/v0.2-rpi.yml
+git checkout --detach vXXX
+KAS_MACHINE=genericx86-64 kas build kas/releases/vXXX-generic.yml
+KAS_MACHINE=raspberrypi0-wifi kas build kas/releases/vXXX-rpi.yml
+KAS_MACHINE=raspberrypi-armv8 kas build kas/releases/vXXX-rpi.yml
 ```
 
 Yocto builds reproducible binaries, but the disk images will not be identical
 because the filesystem creation is non-deterministic. If you mount and compare
 the actual file content of the downloaded images with images built per above,
 the files should be exactly identical: the `tools/imgfilesum.sh` script will do
-that for you.
+that for you. The checksums for each release are published in the release notes.
 
-```
-$ sudo ./tools/imgfilesum.sh ircam-viewer-image-genericx86-64.rootfs-20250309211530.wic
-a20de0d48e207b6385ae7c2d3ba8574595a00841b6e52ae7ef4be44b30e08494
-$ sudo ./tools/imgfilesum.sh ircam-viewer-image-raspberrypi0-wifi.rootfs-20250310064531.wic
-43f75669c70632b5bda0c32f4af47ac9f1fc8b3c004f9b4b807e23e7cbd01fe7
-$ sudo ./tools/imgfilesum.sh ircam-viewer-image-raspberrypi-armv7.rootfs-20250309221156.wic
-fbe5aca2c8cbe216871073d7d2a12d8ca422c1e65c36d25525fb8fe030d3a2a3
-$ sudo ./tools/imgfilesum.sh ircam-viewer-image-raspberrypi-armv8.rootfs-20250309223214.wic
-e728b3eb7de710f8e1b0fe1cd0d07be62e5eda7c02fb8a56382a970ab48802c7
-```
+The releases have their login consoles disabled by adding `noconsoles.yml`.
 
 ## Known Issues
 

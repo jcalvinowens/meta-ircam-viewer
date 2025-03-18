@@ -49,7 +49,8 @@ for name, dd in d.get("repos", {}).items():
 			del dd["branch"]
 
 ts = int(time.time())
-del d["header"]["includes"]
+if "includes" in d["header"]:
+	del d["header"]["includes"]
 d["local_conf_header"]["reproducible"] = f"""
 BUILD_REPRODUCIBLE_BINARIES = "1"
 REPRODUCIBLE_TIMESTAMP_ROOTFS = "{ts}"
