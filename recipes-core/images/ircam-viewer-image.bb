@@ -11,8 +11,4 @@ IMAGE_INSTALL = " \
 	ircam-viewer \
 	"
 
-SYSVINIT_ENABLED_GETTYS = " "
-SERIAL_CONSOLES = " "
-CONSOLES = " "
-
 inherit core-image
