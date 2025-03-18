@@ -8,9 +8,7 @@ into cell phones).
 
 ![](https://static.wbinvd.org/img/ircam/appliance.jpg)
 
-It currently supports x86 UEFI PCs, and all Raspberry Pi models. It has only
-actually been tested on Atom Silvermont NUCs, and the Raspberry Pi Zero W: see
-KNOWN ISSUES below. The project is GPLv3 licensed: see LICENSING below.
+It currently supports x86 UEFI PCs, and all Raspberry Pi models.
 
 ## Downloadable Disk Images
 
@@ -83,6 +81,7 @@ You can also build without the menu directly from the command line as follows:
 
 * `KAS_MACHINE=genericx86-64 kas build kas/generic.yml`
 * `KAS_MACHINE=raspberrypi0-wifi kas build kas/rpi.yml`
+* `KAS_MACHINE=raspberrypi-armv7 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv8 kas build kas/rpi.yml`
 
 The default configuration uses `/var/tmp/yocto_dl` as the DL\_DIR to cache
@@ -116,6 +115,7 @@ are identical to the base configuration at the time, but with pinned git SHAs.
 git checkout --detach vXXX
 KAS_MACHINE=genericx86-64 kas build kas/releases/vXXX-generic.yml
 KAS_MACHINE=raspberrypi0-wifi kas build kas/releases/vXXX-rpi.yml
+KAS_MACHINE=raspberrypi-armv7 kas build kas/releases/vXXX-rpi.yml
 KAS_MACHINE=raspberrypi-armv8 kas build kas/releases/vXXX-rpi.yml
 ```
 
@@ -129,6 +129,7 @@ The releases have their login consoles disabled by adding `noconsoles.yml`.
 
 ## Known Issues
 
+* Performance on the Raspberry Pi 4b/5 is so poor they are unusable
 * Recording almost immediately fills the disk: need to expand on first boot
 * Video cards on PCs other than i915 will not have their kernel module loaded
 * The x86-x32 build doesn't work due to v4l ioctl problems I need to look into

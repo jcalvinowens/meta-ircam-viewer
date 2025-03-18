@@ -70,7 +70,7 @@ choice
 		select WANT_BASE_RPI
 		bool "Raspberry Pi 32-bit Generic"
 		help
-		  Supports all known Raspberry Pi revisions.
+		  Supports all known Raspberry Pi revisions except originals.
 
 	config raspberrypi-armv8
 		select WANT_BASE_RPI
