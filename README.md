@@ -140,7 +140,6 @@ e728b3eb7de710f8e1b0fe1cd0d07be62e5eda7c02fb8a56382a970ab48802c7
 
 ## Known Issues
 
-* Performance on the Raspberry Pi 4b/5 is so poor they are unusable
 * Recording almost immediately fills the disk: need to expand on first boot
 * Video cards on PCs other than i915 will not have their kernel module loaded
 * The x86-x32 build doesn't work due to v4l ioctl problems I need to look into
