@@ -20,4 +20,3 @@ local_conf_header:
     TOOLCHAIN = "clang"
     LIBCPLUSPLUS = "-stdlib=libc++"
     TC_CXX_RUNTIME = "llvm"
-    TCLIBC = "musl"
