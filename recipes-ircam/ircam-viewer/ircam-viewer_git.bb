@@ -19,14 +19,16 @@ FILES:${PN} += "${sysconfdir}/init.d/modules.sh ${sysconfdir}/init.d/ircam.sh"
 do_install() {
 	install -d ${D}${bindir}
 	install -m 0755 ${S}/ircam ${D}${bindir}
-	install -d ${D}${sysconfdir}/init.d
-	install -d ${D}${sysconfdir}/rcS.d
+	install -m 0755 ${S}/util/sisyphus ${D}${bindir}
+	install -m 0755 ${S}/util/kfwd ${D}${bindir}
 
+	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${F}/modules.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${F}/ircam.sh ${D}${sysconfdir}/init.d/
+
+	install -d ${D}${sysconfdir}/rcS.d
 	ln -s ${sysconfdir}/init.d/modules.sh \
 		${D}${sysconfdir}/rcS.d/S10modules.sh
-
-	install -m 0755 ${F}/ircam.sh ${D}${sysconfdir}/init.d/
 	ln -s ${sysconfdir}/init.d/ircam.sh \
 		${D}${sysconfdir}/rcS.d/S95ircam.sh
 }
