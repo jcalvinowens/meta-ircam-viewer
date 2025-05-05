@@ -8,7 +8,14 @@ into cell phones).
 
 ![](https://static.wbinvd.org/img/ircam/appliance.jpg)
 
-It currently supports x86 UEFI PCs, and all Raspberry Pi models.
+It currently supports x86 UEFI PCs, and all\*\* Raspberry Pi models.
+
+\*\* Note that the Pi 4b/5 and Zero-2W are known to have very poor performance:
+see KNOWN ISSUES below. The currently recommended board is the Raspberry Pi Zero
+or Zero W (buy
+[here](https://www.alibaba.com/product-detail/Hotsale-Raspberry-Pi-Zero-W-Board_60711854498.html)
+or [here](https://www.aliexpress.us/item/3256805605866860.html)
+or [here](https://www.amazon.com/dp/B0C5BC6K6G/).
 
 ## Downloadable Disk Images
 
@@ -80,6 +87,7 @@ select "BUILD" to kick off a build!
 You can also build without the menu directly from the command line as follows:
 
 * `KAS_MACHINE=genericx86-64 kas build kas/generic.yml`
+* `KAS_MACHINE=raspberrypi0 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi0-wifi kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv7 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv8 kas build kas/rpi.yml`
@@ -114,6 +122,7 @@ are identical to the base configuration at the time, but with pinned git SHAs.
 ```
 git checkout --detach vXXX
 KAS_MACHINE=genericx86-64 kas build kas/releases/vXXX-generic.yml
+KAS_MACHINE=raspberrypi0 kas build kas/releases/vXXX-rpi.yml
 KAS_MACHINE=raspberrypi0-wifi kas build kas/releases/vXXX-rpi.yml
 KAS_MACHINE=raspberrypi-armv7 kas build kas/releases/vXXX-rpi.yml
 KAS_MACHINE=raspberrypi-armv8 kas build kas/releases/vXXX-rpi.yml
@@ -133,6 +142,7 @@ The releases have their login consoles disabled by adding `noconsoles.yml`.
 * Recording almost immediately fills the disk: need to expand on first boot
 * Video cards on PCs other than i915 will not have their kernel module loaded
 * The x86-x32 build doesn't work due to v4l ioctl problems I need to look into
+* The program segfaults in libgallium on the pizero when built with musl
 
 ## Licensing
 

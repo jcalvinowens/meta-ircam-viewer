@@ -1,12 +1,16 @@
-# RELEASE BUILD TIMESTAMP: 2025-03-09T21:07:46+00:00
+# RELEASE BUILD TIMESTAMP: 2025-05-05T06:12:00+00:00
 
 header:
   version: 17
 local_conf_header:
-  accept-synaptics-killswitch: 'LICENSE_FLAGS_ACCEPTED += "synaptics-killswitch"
+  musl: 'TCLIBC = "musl"
 
     '
-  enable-uart: 'ENABLE_UART = "1"
+  noconsole: 'SYSVINIT_ENABLED_GETTYS = " "
+
+    SERIAL_CONSOLES = " "
+
+    CONSOLES = " "
 
     '
   ffmpeg-license: 'LICENSE_FLAGS_ACCEPTED += "commercial_ffmpeg"
@@ -29,36 +33,35 @@ local_conf_header:
 
     BUILD_REPRODUCIBLE_BINARIES = "1"
 
-    REPRODUCIBLE_TIMESTAMP_ROOTFS = "1741554466"
+    REPRODUCIBLE_TIMESTAMP_ROOTFS = "1746425520"
 
-    SOURCE_DATE_EPOCH = "1741554466"
+    SOURCE_DATE_EPOCH = "1746425520"
 
     '
 distro: ircam
 target:
 - ircam-viewer-image
-- ircam-viewer-debug-image
 repos:
   bitbake:
     url: https://git.openembedded.org/bitbake
     layers:
       .: excluded
-    commit: d5562e007c7c64e8613a118ab9a6c73ed2063263
+    commit: 7c74310440f4d6ec47cf5bacf597e18308b3bb20
   openembedded-core:
     url: https://git.openembedded.org/openembedded-core
     layers:
       meta:
-    commit: 6027a6c6cf283bfb639bb6c3bc2f35b3da225352
+    commit: 0ddda88b928a8b4e5ca3a4cc6112b8331cdff544
   meta-openembedded:
     url: https://git.openembedded.org/meta-openembedded
     layers:
       meta-oe:
-    commit: 74110869a8c1c54270c3a919ef7e84bed896e166
+    commit: 2bfceb99a4feb535d4183b0aa6c53523040bcadd
   meta-ircam-viewer:
     layers:
       .:
-  meta-raspberrypi:
-    url: https://git.yoctoproject.org/meta-raspberrypi
+  meta-yocto:
+    url: https://git.yoctoproject.org/meta-yocto
     layers:
-      .:
-    commit: d605ed7ae7defbe0e09cf8ed4c01e6cfdd188192
+      meta-yocto-bsp:
+    commit: 09bef6a491c087f0f0371874e759aae08a720c4e

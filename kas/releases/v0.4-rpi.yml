@@ -1,4 +1,4 @@
-# RELEASE BUILD TIMESTAMP: 2025-03-18T05:08:11+00:00
+# RELEASE BUILD TIMESTAMP: 2025-05-05T06:12:00+00:00
 
 header:
   version: 17
@@ -39,31 +39,30 @@ local_conf_header:
 
     BUILD_REPRODUCIBLE_BINARIES = "1"
 
-    REPRODUCIBLE_TIMESTAMP_ROOTFS = "1742274491"
+    REPRODUCIBLE_TIMESTAMP_ROOTFS = "1746425520"
 
-    SOURCE_DATE_EPOCH = "1742274491"
+    SOURCE_DATE_EPOCH = "1746425520"
 
     '
 distro: ircam
 target:
 - ircam-viewer-image
-- ircam-viewer-debug-image
 repos:
   bitbake:
     url: https://git.openembedded.org/bitbake
     layers:
       .: excluded
-    commit: a121db3d8d28420c36369237b8bb11c2d0aaf5f7
+    commit: 7c74310440f4d6ec47cf5bacf597e18308b3bb20
   openembedded-core:
     url: https://git.openembedded.org/openembedded-core
     layers:
       meta:
-    commit: 7fa58d595bcbc1c5564867952f724a6d0dbda986
+    commit: 0ddda88b928a8b4e5ca3a4cc6112b8331cdff544
   meta-openembedded:
     url: https://git.openembedded.org/meta-openembedded
     layers:
       meta-oe:
-    commit: 6d13c58e386d478b8788f440b7815cb866b9d6f0
+    commit: 2bfceb99a4feb535d4183b0aa6c53523040bcadd
   meta-ircam-viewer:
     layers:
       .:
@@ -71,4 +70,4 @@ repos:
     url: https://git.yoctoproject.org/meta-raspberrypi
     layers:
       .:
-    commit: cd558f77b6b1a6d0fa15cd9558df0c0262d42c91
+    commit: 3ba4438d9d209382d6afa914c70814205e8f93ac
