@@ -3,7 +3,3 @@ header:
   includes:
     - kas/base.yml
     - kas/include/meta-yocto-bsp.yml
-
-local_conf_header:
-  musl: |
-    TCLIBC = "musl"

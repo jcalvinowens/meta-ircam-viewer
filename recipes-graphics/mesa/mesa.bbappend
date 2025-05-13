@@ -4,6 +4,7 @@ PACKAGECONFIG:append:class-target = " \
 	gallium \
 	gbm \
 	gles \
+	imagination \
 	lima \
 	v3d \
 	vc4 \
@@ -15,7 +16,6 @@ PACKAGECONFIG:remove:class-target = " \
 	freedreno-fdperf \
 	gallium-llvm \
 	glvnd \
-	imagination \
 	kmsro \
 	lmsensors \
 	opencl \

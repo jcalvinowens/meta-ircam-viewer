@@ -8,14 +8,14 @@ into cell phones).
 
 ![](https://static.wbinvd.org/img/ircam/appliance.jpg)
 
-It currently supports x86 UEFI PCs, and all\*\* Raspberry Pi models.
+It currently supports generic x86 UEFI PCs and all\*\* Raspberry Pi models.
 
 \*\* Note that the Pi 4b/5 and Zero-2W are known to have very poor performance:
 see KNOWN ISSUES below. The currently recommended board is the Raspberry Pi Zero
 or Zero W (buy
 [here](https://www.alibaba.com/product-detail/Hotsale-Raspberry-Pi-Zero-W-Board_60711854498.html)
 or [here](https://www.aliexpress.us/item/3256805605866860.html)
-or [here](https://www.amazon.com/dp/B0C5BC6K6G/).
+or [here](https://www.amazon.com/dp/B0C5BC6K6G/)).
 
 ## Downloadable Disk Images
 
@@ -87,6 +87,7 @@ select "BUILD" to kick off a build!
 You can also build without the menu directly from the command line as follows:
 
 * `KAS_MACHINE=genericx86-64 kas build kas/generic.yml`
+* `KAS_MACHINE=beaglebone-yocto kas build kas/generic.yml`
 * `KAS_MACHINE=raspberrypi0 kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi0-wifi kas build kas/rpi.yml`
 * `KAS_MACHINE=raspberrypi-armv7 kas build kas/rpi.yml`
@@ -142,7 +143,8 @@ The releases have their login consoles disabled by adding `noconsoles.yml`.
 * Recording almost immediately fills the disk: need to expand on first boot
 * Video cards on PCs other than i915 will not have their kernel module loaded
 * The x86-x32 build doesn't work due to v4l ioctl problems I need to look into
-* The program segfaults in libgallium on the pizero when built with musl
+* The program segfaults in libgallium on beaglebone/pizero when built with musl
+* The program fails to initialize the framebuffer on the Beaglebone Black
 
 ## Licensing
 

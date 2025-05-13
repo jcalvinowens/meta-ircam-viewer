@@ -33,6 +33,9 @@ local_conf_header:
   ffmpeg-license: |
     LICENSE_FLAGS_ACCEPTED += "commercial_ffmpeg"
 
+  libc: |
+    TCLIBC = "glibc"
+
   dldir: |
     DL_DIR = "/var/tmp/yocto_dl"
     BB_GENERATE_SHALLOW_TARBALLS = "1"
