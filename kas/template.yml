@@ -1,0 +1,22 @@
+header:
+  version: 17
+  includes:
+    - kas/include/base.yml
+    - kas/include/noconsole.yml
+
+distro: ircam
+target:
+  - mc:beaglebone-yocto:ircam-viewer-image
+  - mc:raspberrypi:ircam-viewer-image
+  - mc:raspberrypi0:ircam-viewer-image
+  - mc:raspberrypi0-wifi:ircam-viewer-image
+  - mc:raspberrypi2:ircam-viewer-image
+  - mc:raspberrypi3-64:ircam-viewer-image
+  - mc:raspberrypi4-64:ircam-viewer-image
+  - mc:raspberrypi0-2w-64:ircam-viewer-image
+  - mc:raspberrypi5:ircam-viewer-image
+  - mc:raspberrypi-armv7:ircam-viewer-image
+  - mc:raspberrypi-armv8:ircam-viewer-image
+  - mc:x86-64:ircam-viewer-image
+  - mc:x86-64-x32:ircam-viewer-image
+  - mc:x86:ircam-viewer-image

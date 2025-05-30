@@ -37,6 +37,9 @@ for path in d.get("header", {}).get("includes", []):
 	with open(path, "rb") as f:
 		d = dmerge(d, yaml.safe_load(f.read()))
 
+if "defaults" in d:
+	del d["defaults"]
+
 for name, dd in d.get("repos", {}).items():
 	if name == "meta-ircam-viewer":
 		continue
@@ -46,7 +49,8 @@ for name, dd in d.get("repos", {}).items():
 		if ref.endswith(b'\tHEAD'):
 			sha = ref.split(b'\t')[0]
 			dd["commit"] = sha.decode("ascii", "ignore")
-			del dd["branch"]
+			if "branch" in dd:
+				del dd["branch"]
 
 ts = int(time.time())
 if "includes" in d["header"]:

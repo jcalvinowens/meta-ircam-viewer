@@ -1,29 +1,39 @@
 header:
   version: 17
 
-distro: ircam
-target:
-  - ircam-viewer-image
-  - ircam-viewer-debug-image
+defaults:
+  repos:
+    branch: master
+
+env:
+  BB_NUMBER_THREADS: null
+  PARALLEL_MAKE: null
 
 repos:
   bitbake:
     url: https://git.openembedded.org/bitbake
-    branch: master
     layers:
       .: excluded
 
   openembedded-core:
     url: https://git.openembedded.org/openembedded-core
-    branch: master
     layers:
       meta:
 
   meta-openembedded:
     url: https://git.openembedded.org/meta-openembedded
-    branch: master
     layers:
       meta-oe:
+
+  meta-yocto:
+    url: https://git.yoctoproject.org/meta-yocto
+    layers:
+      meta-yocto-bsp:
+
+  meta-raspberrypi:
+    url: https://git.yoctoproject.org/meta-raspberrypi
+    layers:
+      .:
 
   meta-ircam-viewer:
     layers:
@@ -31,10 +41,7 @@ repos:
 
 local_conf_header:
   ffmpeg-license: |
-    LICENSE_FLAGS_ACCEPTED += "commercial_ffmpeg"
-
-  libc: |
-    TCLIBC = "glibc"
+    LICENSE_FLAGS_ACCEPTED:append = " commercial_ffmpeg synaptics-killswitch"
 
   dldir: |
     DL_DIR = "/var/tmp/yocto_dl"
