@@ -1,0 +1,77 @@
+# RELEASE BUILD TIMESTAMP: 2025-05-30T06:07:31+00:00
+
+header:
+  version: 17
+distro: ircam
+target:
+- mc:beaglebone-yocto:ircam-viewer-image
+- mc:raspberrypi0:ircam-viewer-image
+- mc:raspberrypi0-wifi:ircam-viewer-image
+- mc:raspberrypi-armv7:ircam-viewer-image
+- mc:raspberrypi-armv8:ircam-viewer-image
+- mc:x86-64:ircam-viewer-image
+env:
+  BB_NUMBER_THREADS:
+  PARALLEL_MAKE:
+repos:
+  bitbake:
+    url: https://git.openembedded.org/bitbake
+    layers:
+      .: excluded
+    commit: 3372524cb961d95993b27fe4a8d794cdb7255e09
+  openembedded-core:
+    url: https://git.openembedded.org/openembedded-core
+    layers:
+      meta:
+    commit: 305072dbde8ec5a4f1d455f7fbfa3a631f9f947f
+  meta-openembedded:
+    url: https://git.openembedded.org/meta-openembedded
+    layers:
+      meta-oe:
+    commit: 606849dd407827200200c9fee66110426d36899b
+  meta-yocto:
+    url: https://git.yoctoproject.org/meta-yocto
+    layers:
+      meta-yocto-bsp:
+    commit: e5b8e76ba8232860943406e1c53e71b3d2790f17
+  meta-raspberrypi:
+    url: https://git.yoctoproject.org/meta-raspberrypi
+    layers:
+      .:
+    commit: 49a2d124890b96d28a590e52e6d0dd611c114f6b
+  meta-ircam-viewer:
+    layers:
+      .:
+local_conf_header:
+  ffmpeg-license: 'LICENSE_FLAGS_ACCEPTED:append = " commercial_ffmpeg synaptics-killswitch"
+
+    '
+  dldir: 'DL_DIR = "/var/tmp/yocto_dl"
+
+    BB_GENERATE_SHALLOW_TARBALLS = "1"
+
+    BB_GENERATE_MIRROR_TARBALLS = "1"
+
+    BB_GIT_SHALLOW = "1"
+
+    '
+  diskmon: "BB_DISKMON_DIRS = \" \\\n  STOPTASKS,${TMPDIR},1G,100K \\\n  STOPTASKS,${DL_DIR},1G,100K\
+    \ \\\n  STOPTASKS,${SSTATE_DIR},1G,100K \\\n  STOPTASKS,/tmp,100M,100K \\\n  HALT,${TMPDIR},100M,1K\
+    \ \\\n  HALT,${DL_DIR},100M,1K \\\n  HALT,${SSTATE_DIR},100M,1K \\\n  HALT,/tmp,10M,1K\"\
+    \n"
+  noconsole: 'SYSVINIT_ENABLED_GETTYS = " "
+
+    SERIAL_CONSOLES = " "
+
+    CONSOLES = " "
+
+    '
+  reproducible: '
+
+    BUILD_REPRODUCIBLE_BINARIES = "1"
+
+    REPRODUCIBLE_TIMESTAMP_ROOTFS = "1748585251"
+
+    SOURCE_DATE_EPOCH = "1748585251"
+
+    '
