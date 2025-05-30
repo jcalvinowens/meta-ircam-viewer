@@ -4,13 +4,16 @@ IMAGE_FSTYPES = "wic"
 
 IMAGE_FEATURES = " \
 	tools-debug \
+	tools-sdk \
 	dbg-pkgs \
+	dev-pkgs \
+	doc-pkgs \
 	allow-empty-password \
 	empty-root-password \
 	allow-root-login \
 	"
 
-IMAGE_INSTALL = " \
+CORE_IMAGE_EXTRA_INSTALL += " \
 	packagegroup-core-boot \
 	kernel-modules \
 	ircam-viewer \
