@@ -20,8 +20,9 @@ or [here](https://www.amazon.com/dp/B0C5BC6K6G/)).
 ## Downloadable Disk Images
 
 Bootable disk images are available for download
-[on Github](https://github.com/jcalvinowens/meta-ircam-viewer/releases). Write
-them to bootable media like this:
+[on Github](https://github.com/jcalvinowens/meta-ircam-viewer/releases) and
+[on Codeberg](https://codeberg.org/jcalvinowens/meta-ircam-viewer/releases).
+Write them to bootable media like this:
 
 ```
 $ xzcat ircam-viewer-image-genericx86-64.rootfs-20250307072015.wic.xz | sudo dd of=/dev/${DISK} status=progress
