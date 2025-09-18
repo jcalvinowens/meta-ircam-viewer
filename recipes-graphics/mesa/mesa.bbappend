@@ -2,6 +2,7 @@ PACKAGECONFIG:append:class-target = " \
 	broadcom \
 	egl \
 	gallium \
+	gallium-llvm \
 	gbm \
 	gles \
 	imagination \
@@ -14,7 +15,6 @@ PACKAGECONFIG:remove:class-target = " \
 	dri3 \
 	etnaviv \
 	freedreno-fdperf \
-	gallium-llvm \
 	glvnd \
 	kmsro \
 	lmsensors \
