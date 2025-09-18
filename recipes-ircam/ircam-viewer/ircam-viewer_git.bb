@@ -6,12 +6,11 @@ SRC_URI = "git://github.com/jcalvinowens/ircam-viewer;protocol=https;nobranch=1"
 MIRRORS = "git://codeberg.org/jcalvinowens/ircam-viewer;protocol=https;nobranch=1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 SRCREV = "5801a2306a3fdd074fe3d37b9d94af8a8371a2b8"
-S = "${WORKDIR}/git"
 
 DEPENDS = "libav libsdl2 libsdl2-ttf"
 RDEPENDS:${PN} = "libdrm libegl libgbm libgles2 libudev"
 
-F = "${WORKDIR}/sources-unpack"
+F = "${UNPACKDIR}"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://modules.sh file://ircam.sh"
 FILES:${PN} += "${sysconfdir}/init.d/modules.sh ${sysconfdir}/init.d/ircam.sh"
