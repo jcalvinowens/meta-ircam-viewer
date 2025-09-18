@@ -13,7 +13,7 @@ repos:
   bitbake:
     url: https://git.openembedded.org/bitbake
     layers:
-      .: excluded
+      .: disabled
 
   openembedded-core:
     url: https://git.openembedded.org/openembedded-core
