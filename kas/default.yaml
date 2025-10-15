@@ -1,0 +1,7 @@
+header:
+  version: 17
+  includes:
+    - kas/include/base.yml
+
+distro: ircam
+target: mc:x86-64:ircam-viewer-debug-image
