@@ -1,1 +1,7 @@
 build/
+bitbake/
+meta-openembedded/
+meta-raspberrypi/
+meta-yocto/
+openembedded-core/
+.kas_shell_history
