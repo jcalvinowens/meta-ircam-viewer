@@ -2,13 +2,13 @@
 
 This layer builds a minimalist Linux firmware which runs
 [ircam-viewer](https://github.com/jcalvinowens/ircam-viewer?tab=readme-ov-file#linux-infrared-camera-viewer),
-allowing you to create cheap "appliances" for displaying or recording output
-from commonly avaliable USB infrared cameras which are typically designed to be
-plugged into cell phones.
+creating a cheap "appliance" for displaying or recording output from commonly
+available USB infrared cameras.
 
 ![](https://static.wbinvd.org/img/ircam/appliance.jpg)
 
-It currently supports generic x86 UEFI PCs and all\*\* Raspberry Pi models.
+The firmware currently supports generic x86 UEFI PCs, and all\*\* Raspberry Pi
+models.
 
 \*\* Note that the Pi 4b/5 and Zero-2W are known to have very poor performance:
 see KNOWN ISSUES below. The currently recommended board is the Raspberry Pi Zero
@@ -44,54 +44,76 @@ Building this firmware with Yocto should take under an hour on a typical PC
 suitable for modern video games. The result of the build process is a bootable
 disk image you can simply `dd` to bootable media for your target device.
 
-### 1. Install Yocto
+### 1. Set up for Yocto
 
-Follow [these instructions](https://docs.yoctoproject.org/ref-manual/system-requirements.html#required-packages-for-the-build-host)
-to set up your Linux machine to run Yocto builds. In addition to the list of
-officially supported distributions, Gentoo and Debian Trixie are known to work.
+If you run Linux, ensure your machine meets the [minimum requirements](https://docs.yoctoproject.org/dev-manual/start.html#setting-up-a-native-linux-host), and install the [required packages](https://docs.yoctoproject.org/ref-manual/system-requirements.html#required-packages-for-the-build-host).
 
-### 2. Install Kas
+If you don't run Linux, you can [use WSL on Windows](https://docs.yoctoproject.org/dev-manual/start.html#setting-up-to-use-windows-subsystem-for-linux-wsl-2), [use CROPS containers on Mac](https://docs.yoctoproject.org/dev-manual/start.html#setting-up-to-use-cross-platforms-crops), or simply run Linux in a VM and follow the above instructions.
 
-This layer uses [kas](https://kas.readthedocs.io/en/latest/) to manage the
+### Set up Kas
+
+This repository uses [kas](https://kas.readthedocs.io/en/latest/) to manage the
 Yocto layer dependencies and configs. Most distros support installing a recent
 enough version through the package manager, or you can use pip:
 
 ```
 sudo apt-get install kas  # Debian/Ubuntu
-sudo emerge dev-build/kas # Gentoo
-pip3 install kas # Pip
+sudo emerge dev-build/kas  # Gentoo
+pip3 install kas  # Pip
 ```
 
-You can also run it directly from [the git repo](https://github.com/siemens/kas.git),
-using the `run-kas` shortcut in its root directory.
+You can also run it directly from a local checkout of
+[the git repo](https://github.com/siemens/kas.git), using the `run-kas` shortcut
+in its root directory. You can manually install its dependecies through the
+package manager:
+
+```
+sudo apt install python3-distro python3-yaml python3-jsonschema python3-git python3-gnupg  # Debian/Ubuntu
+sudo emerge dev-python/distro dev-python/pyaml dev-python/jsonschema dev-python/gitpython dev-python/python-gnupg  # Gentoo
+```
 
 ### 3. Build it
 
-Once you've installed kas, run `kas build`, to kick off an x86-64 build! You
-can build for other targets by specifying them on the command line:
+Run `kas build` to kick off an x86-64 build!
 
-* `kas build --target mc:x86-64:ircam-viewer-debug-image`
-* `kas build --target mc:beaglebone-yocto:ircam-viewer-debug-image`
-* `kas build --target mc:raspberrypi0:ircam-viewer-debug-image`
-* `kas build --target mc:raspberrypi0-wifi:ircam-viewer-debug-image`
-* `kas build --target mc:raspberrypi-armv7:ircam-viewer-debug-image`
-* `kas build --target mc:raspberrypi-armv8:ircam-viewer-debug-image`
+You can build for other targets by specifying them on the command line:
+
+* `kas build --target mc:x86-64:ircam-viewer-image`
+* `kas build --target mc:x86-64-x32:ircam-viewer-image`
+* `kas build --target mc:x86:ircam-viewer-image`
+* `kas build --target mc:arm64:ircam-viewer-image`
+* `kas build --target mc:beaglebone-yocto:ircam-viewer-image`
+* `kas build --target mc:raspberrypi:ircam-viewer-image`
+* `kas build --target mc:raspberrypi0:ircam-viewer-image`
+* `kas build --target mc:raspberrypi0-wifi:ircam-viewer-image`
+* `kas build --target mc:raspberrypi2:ircam-viewer-image`
+* `kas build --target mc:raspberrypi3-64:ircam-viewer-image`
+* `kas build --target mc:raspberrypi4-64:ircam-viewer-image`
+* `kas build --target mc:raspberrypi0-2w-64:ircam-viewer-image`
+* `kas build --target mc:raspberrypi5:ircam-viewer-image`
+* `kas build --target mc:raspberrypi-armv7:ircam-viewer-image`
+* `kas build --target mc:raspberrypi-armv8:ircam-viewer-image`
+
+...or build for all supported targets by passing the template YAML:
+
+```
+kas build kas/template.yaml
+```
 
 The default configuration uses `/var/tmp/yocto_dl` as the DL\_DIR to cache
 downloaded source tarballs.
 
 ### 4. Flash the image
 
-After the build process successfully completes, the new images will appear at:
+After the build process successfully completes, the image(s) will appear at:
 
 ```
 ./build/tmp/deploy/images/${MACHINE}/ircam-viewer-image-${MACHINE}.rootfs.wic
 ./build/tmp/deploy/images/${MACHINE}/ircam-viewer-debug-image-${MACHINE}.rootfs.wic
 ```
 
-The images are identical, except that the "debug" image has no root password,
-contains debugging utilities like `gdb` and `strace`, and contains the full set
-of kernel modules.
+The "debug" image has no root password, contains debugging utilities like `gdb`
+and `strace`, and contains the full set of kernel modules.
 
 Use `dd` to write your desired image to bootable media for your target:
 
@@ -117,6 +139,9 @@ that for you. The checksums for each release are published in the release notes.
 
 The releases have their login consoles disabled by adding `noconsoles.yml`. The
 canned release YAML is autogenerated by `tools/release.py`.
+
+Note that the images for x86-64 and x86-64-32 builds end up in different TMPDIRs
+but have identical filenames.
 
 ## Known Issues
 

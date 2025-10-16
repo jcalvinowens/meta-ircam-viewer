@@ -30,7 +30,7 @@ for path in sys.argv[1:]:
 		d = dmerge(d, yaml.safe_load(f.read()))
 
 if len(d) == 0:
-	print("Usage: ./release.py kas/base.yml kas/include/noconsole.yml")
+	print("Usage: ./release.py kas/template.yaml")
 	sys.exit(1)
 
 for path in d.get("header", {}).get("includes", []):
