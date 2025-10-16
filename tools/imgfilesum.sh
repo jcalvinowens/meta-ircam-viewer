@@ -17,9 +17,22 @@ contentsum() {
 sumimage() {
 	local imagepath="${1}"
 	local lodev=$(losetup -r -P --show -f ${imagepath})
-	local tmpf=$(mktemp)
+	if [ -z "${lodev}" ]; then
+		echo "Can't set up block device"
+		exit 1
+	fi
 
-	mount -o ro ${lodev}p2 /mnt
+	# FIXME losetup doesn't wait for partscan to complete... maybe a bug?
+	partprobe > /dev/null 2> /dev/null
+
+	local lopart=$(blkid ${lodev}p* | grep ext4 | cut -d':' -f1)
+	if [ -z "${lopart}" ]; then
+		echo "Can't find root partition"
+		exit 1
+	fi
+
+	local tmpf=$(mktemp)
+	mount -o ro ${lopart} /mnt
 	contentsum /mnt ${tmpf}
 	umount /mnt
 	losetup -d ${lodev}
