@@ -20,3 +20,4 @@ target:
   - mc:x86-64:ircam-viewer-image
   - mc:x86-64-x32:ircam-viewer-image
   - mc:x86:ircam-viewer-image
+  - mc:arm64:ircam-viewer-image
